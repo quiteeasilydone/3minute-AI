@@ -1,7 +1,6 @@
 import openai
 import numpy as np
 
-
 def cos_sim(a: list, b: list) -> float:
 	return np.dot(a, b)/(np.linalg.norm(a)*np.linalg.norm(b))
 

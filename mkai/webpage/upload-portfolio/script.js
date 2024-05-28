@@ -39,15 +39,17 @@ function loadFile(input) {
     newImage.style.display = "block"
 
     container.appendChild(newImage);
-    uploadFile(file);
+    console.log(newImage.src)
+    uploadFile(newImage.src);
 }
 
 async function uploadFile(file) {
     const formData = new FormData()
+    console.log(file)
     formData.append("portfolio", file)
 
     try {
-        const response = await fetch('url', {
+        const response = await fetch('http://127.0.0.1:8000/upload', {
             method: 'POST',
             body: formData
         });

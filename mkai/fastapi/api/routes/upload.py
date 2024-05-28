@@ -6,7 +6,7 @@ import json
 
 router = APIRouter()
 
-@router.post("/api/upload/")
+@router.post("/upload/")
 async def upload(request: Request):
     data = await request.json()
     print(data)

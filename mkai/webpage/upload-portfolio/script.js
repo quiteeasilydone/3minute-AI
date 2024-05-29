@@ -4,6 +4,7 @@ submit.onclick = submitPortfolio;
 var analysis = document.getElementById('analysis-button');
 analysis.onclick = portfolioAnalysis;
 
+url = "http://165.246.44.125:81/api/upload";
 
 function portfolioAnalysis() {
 
@@ -36,30 +37,32 @@ function loadFile(input) {
     newImage.style.visibility = "visible";
     newImage.style.objectFit = "contain";
     newImage.style.margin = "auto";
-    newImage.style.display = "block"
+    newImage.style.display = "block";
 
     container.appendChild(newImage);
-    console.log(newImage.src)
-    uploadFile(newImage.src);
+    console.log(newImage.src);
+    uploadFile(file);
+    // uploadFile('hi');
 }
 
 async function uploadFile(file) {
-    const formData = new FormData()
-    console.log(file)
-    formData.append("portfolio", file)
-
-    try {
-        const response = await fetch('http://127.0.0.1:8000/upload', {
+    var formData = new FormData()
+    formData.append('file', file);
+    try{
+        const response = await fetch(url, {
             method: 'POST',
             body: formData
         });
+
         if (response.ok) {
-            const result = await response.json();
-            console.log('업로드 성공!', result);
+            const jsonResponse = await response.json();
+            alert(`File uploaded successfully: ${jsonResponse.filename}`);
         } else {
-            console.error('업로드 실패', response.statusText);
+            alert('File upload failed!');
         }
     } catch (error) {
-        console.error('에러 발생', error);
+        console.error('Error:', error);
+        alert('An error occurred while uploading the file.');
     }
+    
 }

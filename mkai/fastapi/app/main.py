@@ -3,9 +3,11 @@ from fastapi import FastAPI
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.openapi.models import Info
 
+from api.routes import upload
+
 from uvicorn import run
 
-app = FastAPI()
+app = FastAPI(openapi_url="/api/docs/openapi.json")
 
 @app.get("/api/docs", include_in_schema=False)
 async def get_documentation():
@@ -15,7 +17,7 @@ async def get_documentation():
         oauth2_redirect_url="/api/docs/oauth2-redirect.html",
     )
 
-# app.include_router(login.router, tags=["login"])
+app.include_router(upload.router, tags=["upload"])
 # app.include_router(infras.router, tags=["infras"])
 # app.include_router(posted_reports.router, tags=["posted_reports"])
 # app.include_router(reports.router, tags=["reports"])

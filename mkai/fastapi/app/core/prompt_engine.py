@@ -6,8 +6,7 @@
 # import numpy as np
 import numpy as np
 from openai import OpenAI
-# openai.api_key = "sk-proj-27E7m0G6r6ZmFm9UA7R2T3BlbkFJMLfd3OMNNvwUnJ2ISzya"
-client = OpenAI(api_key="sk-proj-27E7m0G6r6ZmFm9UA7R2T3BlbkFJMLfd3OMNNvwUnJ2ISzya")
+client = OpenAI()
 
 response = client.chat.completions.create(
     model="gpt-4o",
@@ -30,7 +29,7 @@ response = client.chat.completions.create(
 
 # input_img = Image.open("./이력서001.jpg")
 
-# llm = ChatOpenAI(model='gpt-4-vision-preview', api_key="sk-proj-27E7m0G6r6ZmFm9UA7R2T3BlbkFJMLfd3OMNNvwUnJ2ISzya")
+# llm = ChatOpenAI(model='gpt-4-vision-preview')
 # answer = llm.invoke("https://cdn.eyesmag.com/content/uploads/posts/2022/03/22/main-d3bbc024-549a-4a23-9c08-5cb675d6b028.jpg" + "\n 이 사진을 묘사해봐")
 
 print(response.choices[0].message.content)

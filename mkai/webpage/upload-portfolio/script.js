@@ -4,7 +4,7 @@ submit.onclick = submitPortfolio;
 var analysis = document.getElementById('analysis-button');
 analysis.onclick = portfolioAnalysis;
 
-url = "http://165.246.44.125:81/api/upload";
+url = "http://165.246.44.125:80/api/upload";
 
 function portfolioAnalysis() {
 
@@ -30,7 +30,7 @@ function loadFile(input) {
     var newImage = document.createElement("img");
     newImage.setAttribute("class", 'img');
 
-    newImage.src = URL.createObjectURL(file);   
+    newImage.src = URL.createObjectURL(file);
 
     newImage.style.width = "70%";
     newImage.style.height = "70%";

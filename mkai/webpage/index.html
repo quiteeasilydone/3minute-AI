@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .preview-img {
+            width: 300px;
+            height: 200px;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
     <header class="w-full bg-blue-600 text-white p-4">
@@ -13,21 +20,21 @@
     <main class = "flex flex-col w-full flex-1 p-8">
         <section class="flex flex-col flex-1 mb-8">
             <div class="flex items-center flex-1 px-4 py-4 justify-start">
-                <img src="https://via.placeholder.com/300x200" alt="Placeholder image">
+                <img src="./img/interview.jpg" alt="Placeholder image" class="preview-img">
                 <div class="w-full">
                     <h2 class="mx-4 text-2xl font-bold mb-2">면접이 처음이신 당신!</h2>
                     <p class="mx-4">면접이 처음이신 분들도 AI를 통해 모의 면접을 진행하면서 쉽게 면접과 친해질수 있습니다.</p>
                 </div>
             </div>
             <div class="flex items-center flex-1 px-4 py-4 justify-end">
-                <div>
+                <div class="w-full">
                     <h2 class="mx-4 text-2xl font-bold mb-2 text-right">면접 경험을 늘리고 싶은 당신!</h2>
                     <p class="mx-4 text-right">이력서 기반의 맞춤형 질문으로 실제와 유사한 면접 경험을 제공해드립니다.</p>
                 </div>
-                <img src="https://via.placeholder.com/300x200" alt="Placeholder image">
+                <img src="./img/experience.jpg" alt="Placeholder image" class="preview-img">
             </div>
             <div class="flex items-center flex-1 px-4 py-4 justify-start">
-                <img src="https://via.placeholder.com/300x200" alt="Placeholder image">
+                <img src="./img/feedback.jpg" alt="Placeholder image" class="preview-img">
                 <div class="w-full">
                     <h2 class="mx-4 text-2xl font-bold mb-2">자소서처럼 면접도 첨삭을 받고 싶은 당신!</h2>
                     <p class="mx-4">질문과 답변에 대한 맞춤형 피드백과 개선된 예시 답변으로 효율적인 면접 컨설팅을 진행할 수 있습니다.</p>

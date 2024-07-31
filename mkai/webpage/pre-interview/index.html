@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <header class="w-full p-4">
+        <h1 class="text-center text-3xl font-bold">면접 질문이 생성되었습니다.</h1>
+        <h1 class="text-center text-3xl font-bold">준비가 완료되면 시작버튼을 눌러 모의 면접을 진행해주세요.</h1>
+    </header>
+    <main class="flex flex-col flex-1 w-full items-center p-4 space-y-4">
+        <section class="flex items-center justify-around w-full max-w-4xl border-gray-600 rounded shadow p-4 bg-white">
+            <div class="flex-1 flex flex-col items-center">
+                <img src="https://via.placeholder.com/150" alt="기술면접" class="rounded-full mb-2">
+                <h2 class="text-xl font-semibold">기술면접</h2>
+                <p class="text-center">기술적 지식과 문제 해결 능력을 평가하는 질문들이 포함됩니다.</p>
+            </div>
+            <div class="flex-1 flex flex-col items-center">
+                <img src="https://via.placeholder.com/150" alt="인성면접" class="rounded-full mb-2">
+                <h2 class="text-xl font-semibold">인성면접</h2>
+                <p class="text-center">성격, 대인 관계 능력 및 조직 적합성을 평가하는 질문들이 포함됩니다.</p>
+            </div>
+            <div class="flex-1 flex flex-col items-center">
+                <img src="https://via.placeholder.com/150" alt="직무면접" class="rounded-full mb-2">
+                <h2 class="text-xl font-semibold">직무면접</h2>
+                <p class="text-center">지원 직무와 관련된 경험 및 역량을 평가하는 질문들이 포함됩니다.</p>
+            </div>
+        </section>
+        <section>
+            <button type="button" id="submit-button" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700" onclick="redirectToInterview()">시작하기</button>
+        </section>
+    </main>
+    <footer class="w-full bg-gray-400 text-white p-4 text-center">
+        <p>HCI Lab AI 토이프로젝트 스터디 [3-minutes AI]</p>
+    </footer>
+    <script src="../script.js"></script>
+    <script src="./pre-interview.js"></script>
+</body>
+</html>

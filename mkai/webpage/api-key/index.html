@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <header class="w-full bg-blue-600 text-white p-4">
+        <h1 class="text-3xl text-center">API 키를 입력해주세요</h1>
+    </header>
+    <main class = "flex flex-col w-full flex-1 p-8">
+        <section id="api-key-section" class="w-full max-w-lg mx-auto">
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-2xl font-bold mb-4">API 키 입력</h2>
+                <input type="text" id="api-key-input" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="API 키를 입력하세요" autocomplete="off">
+                <button class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 w-full" onclick="saveApiKey()">저장</button>
+            </div>
+        </section>
+    </main>
+    <footer class="w-full bg-gray-400 text-white p-4 text-center">
+        <p>HCI Lab AI 토이프로젝트 스터디 [3-minutes AI]</p>
+    </footer>
+    <script src="./api-key.js"></script>
+</body>
+</html>

@@ -4,55 +4,191 @@
 # from PIL import Image
 # import base64
 # import numpy as np
-import numpy as np
-from openai import OpenAI
-client = OpenAI()
+import openai
+from core.utils import extract_json
+import json
 
-response = client.chat.completions.create(
-    model="gpt-4o",
-    messages=[
+def Call_Analyst_GPT(url, api_key):
+    openai.api_key = api_key
+    
+    prompt = '''
+        다음 이력서를 분석해서 분석한 결과를 JSON 형식으로
+        
         {
-            "role": "user",
-            "content": [
-                {"type": "text", "text": "이 이력서를 분석해서 이름, 전공, 프로젝트 경험, 기타 순으로 정리해줘"},
-                {"type": "image_url", "image_url": {
-                    "url": "https://3miniute-mkai-portfolio-bucket.s3.ap-northeast-2.amazonaws.com/%EC%9D%B4%EB%A0%A5%EC%84%9C001.jpg"
-                }}
-            ]
+            "이름": type = str
+            "전공": type = list(str)
+            "직무경험": type = list(str)
+            "기타": type = list(str)
         }
-    ]
-)
-# def encode_img_to_base64(image_path):
-#     with open(image_path, "rb") as img_file:
-#         base64_encoded_image = base64.b64encode(img_file.read()).decode("utf-8")
-#     return base64_encoded_image
+        으로 정리해 이때 JSON만 출력해
+        '''
+    
+    try:
+        response = openai.chat.completions.create(
+            model="gpt-4o",
+            messages = [
+                {
+                    "role": "system",
+                    "content": "너는 면접관이야"
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": prompt},
+                        {"type": "image_url", "image_url": {"url" : f"{url}"}}
+                    ]
+                }
+            ]
+        )
+        print(extract_json(response.choices[0].message.content))
+        
+        answer = json.loads(extract_json(response.choices[0].message.content))
+        
+        return answer
 
-# input_img = Image.open("./이력서001.jpg")
+    except Exception as e:
+        print(f"Error occurred in CallAnalystGPT: {e}")
+        return None
 
-# llm = ChatOpenAI(model='gpt-4-vision-preview')
-# answer = llm.invoke("https://cdn.eyesmag.com/content/uploads/posts/2022/03/22/main-d3bbc024-549a-4a23-9c08-5cb675d6b028.jpg" + "\n 이 사진을 묘사해봐")
+def Call_Interview_GPT(reference_data, job_objective, api_key):
+    openai.api_key = api_key
+    
+    data_prompt = f'''
+    면접 질문 생성 참고용 데이터: \n{str(reference_data)}\n\n
+    위 json 데이터를 참고해서,
+    지원 직무 \n{job_objective}\n 에 대해
+    약 20개 정도의 면접 질문을 Json 형식으로
+    '''
+    
+    question_prompt = '''
+    {
+        "직무질문": type = list(str),
+        "인성질문": type = list(str),
+        "기술질문": type = list(str)
+    }
+    
+    으로 직무 질문 5개, 인성 질문 5개, 기술 질문 10개로 정리해서 Json만 출력해'''
+    
+    prompt = data_prompt + question_prompt
+    
+    try:
+        response = openai.chat.completions.create(
+            model="gpt-4o",
+            messages = [
+                {
+                    "role": "system",
+                    "content": "너는 면접관이야"
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": prompt},
+                    ]
+                }
+            ]
+        )
+        print(extract_json(response.choices[0].message.content))
+        
+        answer = json.loads(extract_json(response.choices[0].message.content))
+        
+        return answer
 
-print(response.choices[0].message.content)
-# print(type(np.array2string(np.array(input_img))))
+    except Exception as e:
+        print(f"Error occurred in CallInterviewGPT: {e}")
+        return None
 
+def Call_Follow_Interview_GPT(reference_data, job_objective, ord_question, ord_answer, api_key):
+    openai.api_key = api_key
+    
+    data_prompt = f'''
+    면접 질문 생성 참고용 데이터: \n{str(reference_data)}\n\n
+    지원 직무: \n{job_objective}\n
+    이전 면접 질문: \n{ord_question}\n
+    이전 면접 답변: \n{ord_answer}\n
+    위 json 데이터를 참고해서,
+    이전 면접 답변과 연관된 꼬리 질문(follow_question)을 Json 형식으로
+    '''
 
-# answer_context = '''
-# 이름: 홍길동
+    question_prompt = '''
+    {
+        "follow_question": type = str
+    }
+    
+    으로 꼬리 질문 1개를 Json만 출력해'''
 
-# 전공:
-# - 컴퓨터공학과(석사)
-# - 컴퓨터공학과(학사)
+    prompt = data_prompt + question_prompt
+    
+    try:
+        response = openai.chat.completions.create(
+            model="gpt-4o",
+            messages = [
+                {
+                    "role": "system",
+                    "content": "너는 면접관이야"
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": prompt},
+                    ]
+                }
+            ]
+        )
+        print(extract_json(response.choices[0].message.content))
+        
+        answer = json.loads(extract_json(response.choices[0].message.content))
+        
+        return answer
 
-# 지원 직무: CI/CD
+    except Exception as e:
+        print(f"Error occurred in CallFollowInterviewGPT: {e}")
+        return None
+    
+def Call_Interview_Feedback_GPT(reference_data, job_objective, ord_question, ord_answer, api_key): # 피드백 프롬프트 개선 필요
+    openai.api_key = api_key
+    
+    data_prompt = f'''
+    면접 질문 생성 참고용 데이터: \n{str(reference_data)}\n\n
+    지원 직무: \n{job_objective}\n
+    면접 질문: \n{ord_question}\n
+    면접 답변: \n{ord_answer}\n
+    위 json 데이터를 참고해서,
+    이전 면접 답변에 대한 피드백과 예시 답변을 Json 형식으로
+    '''
 
-# 진행 프로젝트 목록:
-# - AI 타이어 마모상태 점검 앱 개발
-# - 실시간 분광 이미지 분산 처리 시스템 개발
-# - 스마트 산업 설비 분석 서비스 개발
-# - 자율주행 알고리즘 면허취득 프로젝트
+    question_prompt = '''
+    {
+        "feedback": type = str
+        "example_answer" : type = str
+    }
+    
+    으로 피드백 1개를 Json만 출력해'''
 
-# 이력상 특이점:
-# - 10년 이상 경력
-# - 다양한 산업체에서의 프로젝트 경험
-# - 정보처리 기사, 전산회계 1급, 정보보안 산업기사 등의 다수 자격증 보유
-# '''
+    prompt = data_prompt + question_prompt
+    
+    try:
+        response = openai.chat.completions.create(
+            model="gpt-4o",
+            messages = [
+                {
+                    "role": "system",
+                    "content": "너는 면접관이야"
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": prompt},
+                    ]
+                }
+            ]
+        )
+        print(extract_json(response.choices[0].message.content))
+        
+        answer = json.loads(extract_json(response.choices[0].message.content))
+        
+        return answer
+
+    except Exception as e:
+        print(f"Error occurred in CallInterviewFeedbackGPT: {e}")
+        return None
+    

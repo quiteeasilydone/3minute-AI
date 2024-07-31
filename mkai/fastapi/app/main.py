@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.openapi.models import Info
 
-from api.routes import upload
+from api.routes import upload, interview
 
 from uvicorn import run
 
@@ -18,6 +18,7 @@ async def get_documentation():
     )
 
 app.include_router(upload.router, tags=["upload"])
+app.include_router(interview.router, tags=["interview"])
 # app.include_router(infras.router, tags=["infras"])
 # app.include_router(posted_reports.router, tags=["posted_reports"])
 # app.include_router(reports.router, tags=["reports"])

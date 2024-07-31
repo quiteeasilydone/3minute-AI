@@ -3,10 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chat Interface</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* 로딩 화면 스타일 */
+        #loading {
+            display: none; /* 초기에는 숨김 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            padding-top: 20%;
+            font-size: 1.5em;
+        }
+        /* 채팅 인터페이스 스타일 */
+        #chat-container {
+            max-width: 600px;
+            width: 100%;
+            height: 70vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+        .message {
+            margin: 0.5rem 0;
+            padding: 0.5rem 1rem;
+            border-radius: 16px;
+            max-width: 75%;
+        }
+        .message.question {
+            background: #e2e8f0;
+            align-self: center;
+        }
+    </style>
 </head>
-<body>
-    
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <header class="w-full p-4">
+        <h1 class="text-center text-3xl font-bold">주어진 질문에 답변해주세요.</h1>
+    </header>
+    <main class="flex flex-col flex-1 w-full items-center">
+        <div id="loading">Loading...</div>
+        <div id="chat-container" class="flex flex-col">
+            <div id="question" class="message question"></div>
+        </div>
+        <div class="flex w-full max-w-2xl p-4">
+            <input type="text" id="answer" class="flex-1 p-2 border border-gray-300 rounded-l-md" placeholder="답변을 입력하세요" autocomplete="off">
+            <button id="submit-btn" class="p-2 bg-blue-500 text-white rounded-r-md">제출</button>
+        </div>
+        <div id="result-container" class="hidden">
+            <h3 class="text-center text-2xl">질문 목록이 완료되었습니다.</h3>
+        </div>
+    </main>
+    <footer class="w-full bg-gray-400 text-white p-4 text-center">
+        <p>HCI Lab AI 토이프로젝트 스터디 [3-minutes AI]</p>
+    </footer>
+    <script src="../script.js"></script>
+    <script src="./interview.js"></script>
 </body>
 </html>

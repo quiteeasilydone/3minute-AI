@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>피드백 확인</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
-<body>
-    
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <header class="w-full p-4">
+        <h1 class="text-center text-3xl font-bold">수고하셨습니다.</h1>
+        <h1 class="text-center text-3xl font-bold">면접에 대한 피드백을 확인하세요.</h1>
+    </header>
+    <main class="flex flex-col flex-1 w-full items-center">
+        <section id="feedback-container" class="w-full max-w-4xl p-4 space-y-4">
+            <div id="question-block" class="p-4 bg-gray-200 rounded">
+                <h2 class="text-xl font-bold">질문</h2>
+                <p id="question-text"></p>
+            </div>
+            <div id="answer-block" class="p-4 bg-gray-200 rounded">
+                <h2 class="text-xl font-bold">답변</h2>
+                <p id="answer-text"></p>
+            </div>
+            <div id="feedback-block" class="p-4 bg-gray-200 rounded">
+                <h2 class="text-xl font-bold">피드백</h2>
+                <p id="feedback-text"></p>
+            </div>
+            <div id="example-block" class="p-4 bg-gray-200 rounded">
+                <h2 class="text-xl font-bold">예시 답변</h2>
+                <p id="example-text"></p>
+            </div>
+        </section>
+        <div class="flex space-x-4 mt-4">
+            <button id="prev-btn" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">이전</button>
+            <button id="next-btn" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">다음</button>
+            <button id="main-btn" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700" onclick="redirectToMain()">메인 페이지로</button>
+        </div>
+    </main>
+    <footer class="w-full bg-gray-400 text-white p-4 text-center">
+        <p>HCI Lab AI 토이프로젝트 스터디 [3-minutes AI]</p>
+    </footer>
+    <script src="../script.js"></script>
+    <script src="./feedback.js"></script>
 </body>
 </html>

@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.setItem('currentIndex', 0);
     const feedbackArray = [];
 
+    answerInput.focus();
+
     answerInput.addEventListener("keyup", (event) => {
         if (event.keyCode === 13) {
             event.preventDefault();
@@ -102,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingDiv.style.display = 'none';
         answerInput.disabled = false;
         submitBtn.disabled = false;
+        answerInput.focus();
     });
 
     showNextQuestion();

@@ -5,6 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .box {
+            padding: 2rem;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .box img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        .box h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .box p {
+            line-height: 1.6;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        @media(min-width: 640px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media(min-width: 1024px) {
+            .container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .full-width-box {
+            grid-column: span 3;
+        }
+    </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
     <header class="w-full p-4">
@@ -12,21 +57,41 @@
         <h1 class="text-center text-3xl font-bold">준비가 완료되면 시작버튼을 눌러 모의 면접을 진행해주세요.</h1>
     </header>
     <main class="flex flex-col flex-1 w-full items-center p-4 space-y-4">
-        <section class="flex items-center justify-around w-full max-w-4xl border-gray-600 rounded shadow p-4 bg-white">
-            <div class="flex-1 flex flex-col items-center">
-                <img src="https://via.placeholder.com/150" alt="기술면접" class="rounded-full mb-2">
-                <h2 class="text-xl font-semibold">기술면접</h2>
-                <p class="text-center">기술적 지식과 문제 해결 능력을 평가하는 질문들이 포함됩니다.</p>
+        <section class="container w-full max-w-6xl">
+            <div class="box">
+                <img src="https://via.placeholder.com/150" alt="기술면접">
+                <h2>기술면접</h2>
+                <p>
+                    기술적 지식과 문제 해결 능력을 평가하는 질문들이 포함됩니다. 전공 분야의 지식을 얼마나 충실히 쌓았는지, 채용됐을 경우 회사에서 받을 교육이나 업무를 무리없이 받아들일 준비가 되어있는지를 검증합니다.
+                    기본 지식을 물어보는 형태부터 문제의 해결책을 제시하거나 직접 어떤 서비스를 기획하는 등의 다양한 형태의 면접이 진행됩니다.
+                    필수 전공 과목에 대한 지식과 면접 질문 의도를 제대로 파악하고 답변하는 것이 중요합니다.
+                </p>
             </div>
-            <div class="flex-1 flex flex-col items-center">
-                <img src="https://via.placeholder.com/150" alt="인성면접" class="rounded-full mb-2">
-                <h2 class="text-xl font-semibold">인성면접</h2>
-                <p class="text-center">성격, 대인 관계 능력 및 조직 적합성을 평가하는 질문들이 포함됩니다.</p>
+            <div class="box">
+                <img src="https://via.placeholder.com/150" alt="인성면접">
+                <h2>인성면접</h2>
+                <p>
+                    성격, 대인 관계 능력 및 조직 적합성을 평가하는 질문들이 포함됩니다. 팀워크, 리더십, 의사소통 능력, 스트레스 관리 능력 등을 검증합니다.
+                    다양한 상황에서의 대처 능력을 평가하며 지원자의 성격과 태도가 회사 문화와 얼마나 잘 맞는지 확인합니다.
+                    진정성과 일관성 있는 답변이 중요하며, 자신의 가치관과 경험을 잘 녹여내는 답변을 준비하는 것이 좋습니다.
+                </p>
             </div>
-            <div class="flex-1 flex flex-col items-center">
-                <img src="https://via.placeholder.com/150" alt="직무면접" class="rounded-full mb-2">
-                <h2 class="text-xl font-semibold">직무면접</h2>
-                <p class="text-center">지원 직무와 관련된 경험 및 역량을 평가하는 질문들이 포함됩니다.</p>
+            <div class="box">
+                <img src="https://via.placeholder.com/150" alt="직무면접">
+                <h2>직무면접</h2>
+                <p>
+                    지원 직무와 관련된 경험 및 역량을 평가하는 질문들이 포함됩니다. 이전 직무 경험, 프로젝트 경험 등을 토대로 실질적인 업무 능력을 확인합니다.
+                    직무와 관련된 구체적인 사례를 통해 문제 해결 능력, 창의성, 업무 성과 등을 평가합니다.
+                    구체적인 예시와 함께 자신의 성과를 설명하고, 해당 직무에 대한 열정을 보여주는 것이 중요합니다.
+                </p>
+            </div>
+            <div class="box full-width-box">
+                <h2>서비스 이용 팁</h2>
+                <p>
+                    면접은 준비된 질문에 따라 진행되며 각 질문에 대해 추가적인 질문이 생성될 수 있습니다. <br>
+                    채팅 형식으로 진행되지만 최대한 실제 면접과 유사하게 시간제한을 두고 답변하는 것이 도움이 됩니다. <br>
+                    AI 면접 서비스를 통해 여러분의 성공적인 면접을 기원합니다!
+                </p>
             </div>
         </section>
         <section>

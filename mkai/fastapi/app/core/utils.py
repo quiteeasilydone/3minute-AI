@@ -23,13 +23,6 @@ def treshold_check(cosine_similarity: float, threshold: float) -> bool:
 	else:
 		return True
 
-def load_analyst_api_key(env_file_path):
-    with open(env_file_path, 'r') as file:
-        env_data = json.load(file)
-
-        PORTFOLIO_ANALYSIS_API_KEY = env_data["PORTFOLIO_ANALYSIS_API_KEY"]
-    return PORTFOLIO_ANALYSIS_API_KEY
-
 def extract_json(json_str):
     try:
         # 첫 번째 {와 마지막 }의 위치를 찾음

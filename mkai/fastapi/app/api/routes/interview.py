@@ -6,6 +6,7 @@ import json, os, time
 import boto3
 from db.storage_setting import load_s3_client
 from core.prompt_engine import *
+from core.utils import *
 from urllib.parse import unquote
 import asyncio
 import random
@@ -54,6 +55,11 @@ async def get_follow_question(request: question_model.followQuestionRequest): # 
 async def get_question_feedback(request: question_model.followQuestionRequest): # 질문에 대한 피드백을 저장, /api/question/follow-question가 요구하는 body에서 ord_question_id필드가 추가적으로 필요
     data = request.dict()
 
+    default_content = {
+        "feedback" : "피드백 할 것 없이 더할 나위 없는 훌륭한 답변입니다.",
+        "example_answer" : ""
+    }
+    
     api_key = data['apiKey']
 
     job_objective = data['job']
@@ -68,8 +74,21 @@ async def get_question_feedback(request: question_model.followQuestionRequest): 
     
 
     try:
-        nxt_question = Call_Interview_Feedback_GPT(reference_data, job_objective, ord_question, ord_answer, api_key)
-        return JSONResponse(content = nxt_question)
+        feedback = Call_Interview_Feedback_GPT(reference_data, job_objective, ord_question, ord_answer, api_key)
+
+        print(feedback)
+        under_threshold = threshold_check(calculate_similarity(feedback["example_answer"], ord_answer), 0.9)
+        print(f'under_threshold: {under_threshold}')
+        
+        if under_threshold:
+            return JSONResponse(content = feedback)
+        else:
+            return JSONResponse(content = default_content)
+            
+
+
+        # 이전 답변과 피드백
+
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

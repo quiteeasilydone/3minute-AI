@@ -47,7 +47,7 @@ def Call_Analyst_GPT(url, api_key):
         return answer
 
     except Exception as e:
-        print(f"Error occurred in CallAnalystGPT: {e}")
+        print(f"Error occurred in Call_Analyst_GPT: {e}")
         return None
 
 def Call_Interview_GPT(reference_data, job_objective, api_key):
@@ -94,7 +94,7 @@ def Call_Interview_GPT(reference_data, job_objective, api_key):
         return answer
 
     except Exception as e:
-        print(f"Error occurred in CallInterviewGPT: {e}")
+        print(f"Error occurred in Call_Interview_GPT: {e}")
         return None
 
 def Call_Follow_Interview_GPT(reference_data, job_objective, ord_question, ord_answer, api_key):
@@ -141,7 +141,7 @@ def Call_Follow_Interview_GPT(reference_data, job_objective, ord_question, ord_a
         return answer
 
     except Exception as e:
-        print(f"Error occurred in CallFollowInterviewGPT: {e}")
+        print(f"Error occurred in Call_Follow_Interview_GPT: {e}")
         return None
     
 def Call_Interview_Feedback_GPT(reference_data, job_objective, ord_question, ord_answer, api_key): # 피드백 프롬프트 개선 필요
@@ -189,6 +189,6 @@ def Call_Interview_Feedback_GPT(reference_data, job_objective, ord_question, ord
         return answer
 
     except Exception as e:
-        print(f"Error occurred in CallInterviewFeedbackGPT: {e}")
+        print(f"Error occurred in Call_Interview_Feedback_GPT: {e}")
         return None
     

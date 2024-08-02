@@ -17,7 +17,7 @@ def calculate_similarity(sentence_a: str, sentence_b: str) -> float:
 		).data[0].embedding
 	return cos_sim(embed1, embed2)
 
-def treshold_check(cosine_similarity: float, threshold: float) -> bool:
+def threshold_check(cosine_similarity: float, threshold: float) -> bool:
 	if cosine_similarity >= threshold:
 		return False
 	else:
